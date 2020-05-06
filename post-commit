@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "git push after commit "
+
+if [ `git rev-parse --abbrev-ref HEAD` == "dev1" ];
+then
+
+git push -u origin dev1
+curl --user "admin:redhat" http://192.168.43.243:8080//job/test/build?token=[add token here]
+if [ `git rev-parse --abbrev-ref HEAD` == "master" ];
+then
+
+git push -u origin master
+curl --user "admin:redhat" http://192.168.43.243:8080//job/main_server/build?token=[add tokrn here]
+fi
